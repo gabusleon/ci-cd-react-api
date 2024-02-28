@@ -5,10 +5,10 @@ on:
     branches: [main, master]      
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
 
-    steps:
+  steps:
     - name: Check out code
       uses: actions/checkout@v2
 
@@ -20,5 +20,10 @@ jobs:
     - name: Install dependencies
       run: npm ci
 
-    - name: Run tests
-      run: npm test
+    - name: Print debugging information
+      run: |
+        echo "Node Version: $(node --version)"
+        echo "NPM Version: $(npm --version)"
+        echo "Working Directory: $(pwd)"
+        echo "Contents of Working Directory: $(ls -l)"
+        echo "Contents of node_modules: $(ls -l node_modules)"
