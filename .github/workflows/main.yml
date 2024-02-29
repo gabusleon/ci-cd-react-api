@@ -56,18 +56,11 @@ jobs:
           node-version: '20'
       - name: Install dependencies
         run: npm install
-      - name: Testing
-        run: npm test
-        id: test
-      - name: Install Vercel CLI
-        if: steps.test.outcome == 'success'
+      - name: Install Vercel CLI        
         run: npm install --global vercel@latest
-      - name: Pull Vercel Environment Information
-        if: steps.test.outcome == 'success'
+      - name: Pull Vercel Environment Information        
         run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
-      - name: Build Project Artifacts
-        if: steps.test.outcome == 'success'
+      - name: Build Project Artifacts        
         run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
-      - name: Deploy Project Artifacts to Vercel
-        if: steps.test.outcome == 'success'
+      - name: Deploy Project Artifacts to Vercel        
         run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}

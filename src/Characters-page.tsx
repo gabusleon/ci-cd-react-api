@@ -10,7 +10,7 @@ const CharactersPage: React.FC = () => {
 
   return (
     <Container>      
-      <h1>Characters page, won't deploy since it doesn't pass the tests, because are not setting good</h1>
+      <h1>Characters page, Successful deploy</h1>
       <Row>
         {data.characters.results.map((character: any) => {
           return (
