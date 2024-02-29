@@ -9,8 +9,8 @@ const CharactersPage: React.FC = () => {
   if (error) return <p>Error: {error.message}</p>;
 
   return (
-    <Container>
-      <h1>Character List</h1>
+    <Container>      
+      <h1>Characters page, won't deploy since it doesn't pass the tests</h1>
       <Row>
         {data.characters.results.map((character: any) => {
           return (

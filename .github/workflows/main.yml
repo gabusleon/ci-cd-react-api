@@ -44,3 +44,28 @@ jobs:
 
       - name: Run tests
         run: npm test
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '20'
+      - name: Install dependencies
+        run: npm install
+      - name: Testing
+        run: npm test
+        id: test
+      - name: Install Vercel CLI
+        if: steps.test.outcome == 'success'
+        run: npm install --global vercel@latest
+      - name: Pull Vercel Environment Information
+        if: steps.test.outcome == 'success'
+        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Build Project Artifacts
+        if: steps.test.outcome == 'success'
+        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Deploy Project Artifacts to Vercel
+        if: steps.test.outcome == 'success'
+        run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
